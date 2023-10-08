@@ -1,0 +1,51 @@
+import tkinter as tk
+
+# Function to add a task to the list
+def add_task():
+    task = entry_task.get()
+    if task:
+        listbox_tasks.insert(tk.END, task)
+        entry_task.delete(0, tk.END)
+
+# Function to remove a selected task from the list
+def remove_task():
+    try:
+        selected_task_index = listbox_tasks.curselection()[0]
+        listbox_tasks.delete(selected_task_index)
+    except IndexError:
+        pass
+
+# Function to clear all tasks from the list
+def clear_tasks():
+    listbox_tasks.delete(0, tk.END)
+
+# Create the main window
+root = tk.Tk()
+root.title("To-Do List")
+
+# Set window size and background color
+root.geometry("400x400")
+root.configure(bg="#F3F4F6")  # Light gray background
+
+# Entry field for adding tasks
+entry_task = tk.Entry(root, font=("Arial", 16))
+entry_task.pack(pady=10, padx=10, fill=tk.BOTH, expand=True)
+
+# Button to add tasks
+add_button = tk.Button(root, text="Add Task", font=("Arial", 14), command=add_task, bg="#4CAF50", fg="white")
+add_button.pack(fill=tk.BOTH, expand=True)
+
+# Listbox to display tasks
+listbox_tasks = tk.Listbox(root, font=("Arial", 16))
+listbox_tasks.pack(pady=10, padx=10, fill=tk.BOTH, expand=True)
+
+# Button to remove selected task
+remove_button = tk.Button(root, text="Remove Task", font=("Arial", 14), command=remove_task, bg="#F44336", fg="white")
+remove_button.pack(fill=tk.BOTH, expand=True)
+
+# Button to clear all tasks
+clear_button = tk.Button(root, text="Clear All", font=("Arial", 14), command=clear_tasks, bg="#2196F3", fg="white")
+clear_button.pack(fill=tk.BOTH, expand=True)
+
+# Run the main loop
+root.mainloop()
